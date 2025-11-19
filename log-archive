@@ -1,0 +1,17 @@
+# Accept one argument from user
+
+Logs_Repo=$1
+
+if [ $# = 1 ]; then
+	if [ -d $Logs_Repo ];then
+		Archive_Name=$(date +%Y%m%d_%H%M%S)
+		echo "Logs content" > spool.log
+		tar -czf logs_archive_$Archive_Name.tar.gz spool.log $Logs_Repo
+		echo "logs_archive_$Archive_Name.tar.gz bien créé dans le dossier $Logs_Repo"
+	else
+		echo "Veuillez renseigner un dossier valide"
+	fi
+else
+	echo "Veuillez renseigner un dossier de destination"
+ fi 
+
