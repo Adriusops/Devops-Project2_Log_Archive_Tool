@@ -1,17 +1,17 @@
 # Accept one argument from user
-
 Logs_Repo=$1
+Parent_Dir=$(dirname $Logs_Repo)
 
 if [ $# = 1 ]; then
-	if [ -d $Logs_Repo ];then
-		Archive_Name=$(date +%Y%m%d_%H%M%S)
-		echo "Logs content" > spool.log
-		tar -czf logs_archive_$Archive_Name.tar.gz spool.log $Logs_Repo
-		echo "logs_archive_$Archive_Name.tar.gz bien créé dans le dossier $Logs_Repo"
-	else
-		echo "Veuillez renseigner un dossier valide"
-	fi
+    if [ -d $Logs_Repo ];then
+        Archive_Name=$(date +%Y%m%d_%H%M%S)
+        mkdir -p $Parent_Dir/archives_logs
+        tar -czf $Parent_Dir/archives_logs/logs_archive_$Archive_Name.tar.gz $Logs_Repo/*
+        echo "logs_archive_$Archive_Name.tar.gz bien créé dans le dossier archives_logs/"
+    else
+        echo "Veuillez renseigner un dossier valide"
+    fi
 else
-	echo "Veuillez renseigner un dossier de destination"
- fi 
+    echo "Veuillez renseigner un dossier de destination"
+ fi
 
